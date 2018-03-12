@@ -1,0 +1,64 @@
+<div ng-controller="articulosFormularioController" id="articulosFormularioController">
+    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-9 m-auto mt-4">
+        <form name="formularioarticulos" id="formularioarticulos">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <p class="text-right text-success bold">Clave: {{articulo.id_articulotexto}}</p>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="de_articulo" class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-5 col-form-label bold text-success text-right">Descripción</label>
+                        <div class="col-xl-9 col-lg-8 col-md-7 col-sm-7 col-7">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="articulo.de_articulo" 
+                                name="de_articulo" id="de_articulo" maxlength="255" auto-focus autocomplete="off" capitalize isrequired />
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="de_modelo" class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-5 col-form-label bold text-success text-right">Modelo</label>
+                        <div class="col-xl-9 col-lg-8 col-md-7 col-sm-7 col-7">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="articulo.de_modelo" 
+                                name="de_modelo" id="de_modelo" maxlength="255"  autocomplete="off" capitalize isrequired />
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="im_precio" class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-5 col-form-label bold text-success text-right">Precio</label>
+                        <div class="col-xl-9 col-lg-8 col-md-7 col-sm-7 col-7">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="articulo.im_precio" 
+                                name="im_precio" id="im_precio" maxlength="255" decimal autocomplete="off" isrequired/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="nu_existencia" class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-5 col-form-label bold text-success text-right">Existencia</label>
+                        <div class="col-xl-9 col-lg-8 col-md-7 col-sm-7 col-7">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="articulo.nu_existencia" 
+                                name="nu_existencia" id="nu_existencia" autocomplete="off" numeric isrequired/>
+                        </div>
+                    </div>
+
+                     <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" ng-if="params.id_articulo">
+                        <label for="sn_activo" class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-5 col-form-label bold text-success text-right">Activo</label>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                            <div class="form-check mt-2 ml-3">
+                                <input type="checkbox" class="form-check-input" ng-model="articulo.sn_activo" 
+                                    name="sn_activo" id="sn_activo" ng-true-value="'1'" ng-false-value="'0'"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 text-right form-group">                            
+                            <button class="btn btn-danger" type="button" style="cursor: pointer;" ng-click="cancelar()">Cancelar</button>&nbsp;
+                            <button class="btn btn-success" type="button" style="cursor: pointer;" ng-click="submit()">Guardar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

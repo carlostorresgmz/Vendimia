@@ -1,0 +1,44 @@
+<div ng-controller="configuracionGeneralFormularioController" id="configuracionGeneralFormularioController">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-9 m-auto mt-4">
+        <form name="formularioconfiguracionGeneral" id="formularioconfiguracionGeneral">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="nu_tasafinancimiento" class="col-xl-5 col-lg-6 col-md-6 col-sm-6 col-6 col-form-label bold text-success text-right">Tasa Financiamiento</label>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="configuraciongeneral.nu_tasafinancimiento" 
+                                name="nu_tasafinancimiento" id="nu_tasafinancimiento" auto-focus autocomplete="off" decimal isrequired />
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="pj_enganche" class="col-xl-5 col-lg-6 col-md-6 col-sm-6 col-6 col-form-label bold text-success text-right">% Enganche</label>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="configuraciongeneral.pj_enganche" 
+                                name="pj_enganche" id="pj_enganche" autocomplete="off" decimal isrequired />
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="nu_plazomaximo" class="col-xl-5 col-lg-6 col-md-6 col-sm-6 col-6 col-form-label bold text-success text-right">Plaza Máximo</label>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="configuraciongeneral.nu_plazomaximo" 
+                                name="nu_plazomaximo" id="nu_plazomaximo" numeric autocomplete="off" isrequired/>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 text-right form-group">
+                            <button class="btn btn-danger" type="button" style="cursor: pointer;" ng-click="limpiar()">Limpiar</button>
+                            <button class="btn btn-success" type="button" style="cursor: pointer;" ng-click="submit()">Guardar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

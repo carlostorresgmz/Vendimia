@@ -1,0 +1,27 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination pagination-sm justify-content-end" ng-if="1 < pages.length || !autoHide">
+        <li ng-if="boundaryLinks" ng-class="{ 'page-item disabled' : pagination.current == 1 }">
+            <a class="page-link" href="" aria-label="Previous" ng-click="setCurrent(1)">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li ng-if="directionLinks" ng-class="{ 'page-item disabled' : pagination.current == 1 }">
+            <a class="page-link" href="" ng-click="setCurrent(pagination.current - 1)">
+                <span aria-hidden="true">&lsaquo;</span>
+            </a>
+        </li>
+        <li ng-repeat="pageNumber in pages track by tracker(pageNumber, $index)" ng-class="{'page-item active' : pagination.current == pageNumber, 'page-item disabled' : pageNumber == '...' }">
+            <a class="page-link" href="" ng-click="setCurrent(pageNumber)">{{ pageNumber  }}</a>
+        </li>
+        <li ng-if="directionLinks" ng-class="{ 'page-item disabled' : pagination.current == pagination.last }">
+            <a class="page-link" href="" aria-label="Next" ng-click="setCurrent(pagination.current + 1)">
+                <span aria-hidden="true">&rsaquo;</span>
+            </a>
+        </li>
+        <li ng-if="boundaryLinks" ng-class="{ 'page-item disabled' : pagination.current == pagination.last }">
+            <a class="page-link" href="" ng-click="setCurrent(pagination.last)">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

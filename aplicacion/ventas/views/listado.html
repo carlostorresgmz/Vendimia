@@ -1,0 +1,36 @@
+<div ng-controller="ventasListadoCtrl">
+    
+    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 m-auto mt-3">
+        <div class="col-12 text-right">        
+            <a href="#!/agregar" class="btn btn-success btn-sm mb-3"><i class="icon ion-android-add-circle mr-2"></i>Nueva Venta</a>
+        </div>
+
+        <table class="table table-light table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>Folio Venta</th>
+                    <th>Clave Cliente</th>
+                    <th>Nombre</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr dir-paginate="elemento in ventas | itemsPerPage: 25">
+                    <td>{{elemento.id_ventatexto}}</td>
+                    <td>{{elemento.id_clientetexto}}</td>
+                    <td>{{elemento.nb_cliente}}</td>
+                    <td>{{elemento.im_total}}</td>
+                    <td>{{elemento.fh_venta}}</td>
+                </tr>
+            </tbody>
+
+            <tfoot ng-show="ventas.length > 0">
+                <tr><th class="pt-3" colspan="5"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th></tr>
+            </tfoot>
+        </table>
+
+    </div>
+    
+</div>

@@ -1,0 +1,164 @@
+<div ng-controller="ventasFormularioController" id="ventasFormularioController">
+    <div class="col-xl-9 col-lg-10 col-md-10 col-sm-12 col-12 m-auto mt-4">
+        <form name="formularioventas" id="formularioventas">
+
+            <div class="card mb-3">
+                <h5 class="card-header bg-primary text-white bold">Registro de Ventas</h5>
+                <div class="card-body">
+
+                    <p class="text-right text-success bold">Folio Venta: {{venta.id_ventatexto}}</p>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-5 col-5 text-right">
+                            <label for="nb_cliente" class="col-auto col-form-label col-form-label-sm bold bg-primary text-white">Cliente</label>
+                        </div>                        
+                        
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-7 col-7">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="venta.nb_clientefull" 
+                                name="nb_cliente" id="nb_cliente" maxlength="255" placeholder="Buscar Cliente" autocomplete="off" 
+                                ng-blur="validaCliente(venta.nb_clientefull)" auto-focus capitalize isrequired/>
+                        </div>
+
+                       <label ng-show="venta.nb_clientefull && venta.de_rfccliente" for="nb_cliente" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 col-form-label col-form-label-sm bold text-secondary text-left">RFC: {{venta.de_rfccliente}}</label>
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 text-right">
+                            <label for="de_articulo" class="col-auto col-form-label col-form-label-sm bold bg-primary text-white text-right">Articulo</label>
+                        </div>                         
+                        
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                            <input type="text" class="form-control form-control-sm col-12" ng-model="venta.de_articulofull" 
+                                name="de_articulo" id="de_articulo" maxlength="255" placeholder="Buscar Articulo" autocomplete="off" 
+                                capitalize />
+                        </div>
+
+                        <button style="cursor:pointer;" class="btn btn-outline-secondary btn-sm" ng-click="agregarArticulo(articuloSelected)">
+                                <i class="ion-plus"></i>
+                        </button>
+                        
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <table class="table table-light table-sm mt-3 mb-3">
+                        <thead class="thead-light">
+                            <tr>
+                                <th style="width:35%;">Descripción Articulo</th>
+                                <th style="width:20%;">Modelo</th>
+                                <th style="width:15%;">Cantidad</th>
+                                <th style="width:15%;">Precio</th>
+                                <th style="width:15%;">Importe</th>
+                                <th  style="width:auto;"class="text-right"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr dir-paginate="elemento in venta.articulosVenta | itemsPerPage: 25">
+                                <td>{{elemento.de_articulo}}</td>
+                                <td>{{elemento.de_modelo}}</td>
+                                <td class="col-auto">
+                                    <input type="text" class="form-control form-control-sm col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7 text-right"
+                                        id="nu_Cantidad$index" name="nu_Cantidad$index" ng-model="elemento.nu_cantidad" 
+                                        ng-blur="calcularImporte(elemento)" ng-focus="saveCantidad(elemento.nu_cantidad)" numeric auto-focus/>
+                                </td>
+                                <td>{{elemento.im_precioFormat}}</td>
+                                <td>{{elemento.im_totalFormat}}</td>
+                                <td class="text-right">
+                                    <div class="btn-group">
+                                        <button style="cursor:pointer;" class="btn btn-outline-secondary btn-sm" ng-click="eliminarArticuloVenta(elemento)" tabindex="-1">
+                                            <i class="ion-android-delete"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot ng-show="ventas.articulosVenta > 0">
+                            <tr><th class="pt-3" colspan="6"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th></tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="dropdown-divider"></div>                   
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pr-0 mr-0 text-right">
+                            <label class="col-auto col-form-label col-form-label-sm bold bg-secondary text-white">Enganche:</label>
+                        </div>                        
+                        
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <label class="col-12 col-form-label col-form-label-sm bold text-primary text-right">{{venta.im_engancheFormat}}</label>
+                            <input type="hidden" id="im_enganche" name="im_enganche" ng-model="venta.im_enganche">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pr-0 mr-0 text-right">
+                            <label class="col-auto col-form-label col-form-label-sm bold bg-secondary text-white">Bonificación Enganche:</label>
+                        </div>                        
+                        
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <label class="col-12 col-form-label col-form-label-sm bold text-primary text-right">{{venta.im_bonificacionengancheFormat}}</label>
+                            <input type="hidden" id="im_bonificacionenganche" name="im_bonificacionenganche" ng-model="venta.im_bonificacionenganche">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 pr-0 mr-0 text-right">
+                            <label class="col-auto col-form-label col-form-label-sm bold bg-secondary text-white">Total:</label>
+                        </div>                        
+                        
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <label class="col-12 col-form-label col-form-label-sm bold text-primary text-right">{{venta.im_totalFormat}}</label>
+                            <input type="hidden" id="im_total" name="im_total" ng-model="venta.im_total">
+                        </div>
+
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="form-group row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" ng-show="venta.abonosmensuales.length > 0">
+
+                        <table class="table table-light table-sm mt-3 mb-3">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="5" class="text-center">ABONOS MENSUALES</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="elemento in venta.abonosmensuales">
+                                    <td>{{elemento.de_abonos}}</td>
+                                    <td>{{elemento.im_abonoFormat}}</td>
+                                    <td>TOTAL A PAGAR {{elemento.im_totalFormat}}</td>
+                                    <td>SE AHORRA {{elemento.im_ahorroFormat}}</td>
+                                    <td>
+                                        <input class="form-check-input" type="radio" name="radiosButtonsAbonosMensuales" id="inlineRadio{{elemento.checkValue}}" style="cursor: pointer;" 
+                                            value="{{elemento.checkValue}}" ng-click="checkAbonoMensual(elemento)"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <div class="form-row">
+                <div class="col-12 text-right form-group">
+                    <button class="btn btn-danger" type="button" style="cursor: pointer;" ng-click="cancelar()">Cancelar</button>&nbsp;
+                    <button class="btn btn-success" type="button" style="cursor: pointer;" ng-click="submit()">{{auxiliares.textoSubmit}}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

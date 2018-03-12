@@ -1,0 +1,55 @@
+<div ng-controller="ArticulosListadoCtrl">
+    
+    <div class="col-xl-7 col-lg-7 col-md-9 col-sm-9 m-auto mt-3">
+        <div class="col-12 text-right">        
+            <a href="#!/agregar" class="btn btn-success btn-sm mb-3"><i class="icon ion-android-add-circle mr-2"></i>Nuevo Articulo</a>
+        </div>
+
+
+        <div class="row mb-3" ng-show="mostrarFiltro">
+            <div class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card bg-light">
+                    <div class="card-body">                        
+                        <input type="text" name="de_articulo" id="de_articulo" class="form-control form-control-sm col-12" 
+                            placeholder="Descripción articulo" ng-model="filtros.de_articulo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-light table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>Clave Articulo</th>
+                    <th>Descripción</th>
+                    <th class="text-right">
+                        <button class="btn btn-secondary btn-sm" style="cursor:pointer;" ng-click="mostrarFiltro = !mostrarFiltro;" title="{{getTitle()}}"><i class="ion-search"></i></button>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr dir-paginate="elemento in articulos | filter: filtros | itemsPerPage: 25"><!-- | filter: filtros | itemsPerPage: 25-->
+                    <td>{{elemento.id_articulotexto}}</td>
+                    <td>{{elemento.de_articulo}}</td>
+                    <td class="text-right">
+                        <div class="btn-group">                            
+                            <a href="#!/{{elemento.id_articulo}}" class="btn btn-outline-secondary btn-sm">
+                                <i class="ion-android-create"></i>
+                            </a>
+                            <button style="cursor:pointer;" class="btn btn-outline-secondary btn-sm" ng-click="eliminar(elemento)">
+                                <i class="ion-android-delete"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+            <tfoot ng-show="clientes.length > 0">
+                <tr><th class="pt-3" colspan="3"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th></tr>
+            </tfoot>
+        </table>
+
+    </div>
+    
+</div>
